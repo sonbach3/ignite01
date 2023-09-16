@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package capy.family;
+
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "capy/family/params.proto";
+import "capy/family/member.proto";
+
+option go_package = "capy/x/family/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  
+  // Parameters queries the parameters of the module.
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/capy/family/params";
+  
+  }
+  
+  // Queries a list of Member items.
+  rpc Member    (QueryGetMemberRequest) returns (QueryGetMemberResponse) {
+    option (google.api.http).get = "/capy/family/member/{id}";
+  
+  }
+  rpc MemberAll (QueryAllMemberRequest) returns (QueryAllMemberResponse) {
+    option (google.api.http).get = "/capy/family/member";
+  
+  }
+}
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetMemberRequest {
+  uint64 id = 1;
+}
+
+message QueryGetMemberResponse {
+  Member Member = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllMemberRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllMemberResponse {
+  repeated Member                                 Member     = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+

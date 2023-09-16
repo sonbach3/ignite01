@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package capy.capy;
+
+import "capy/capy/animals.proto";
+import "capy/capy/animal_skill.proto";
+
+option go_package = "capy/x/capy/types";
+
+// Msg defines the Msg service.
+service Msg {
+  rpc CreateAnimals     (MsgCreateAnimals    ) returns (MsgCreateAnimalsResponse    );
+  rpc UpdateAnimals     (MsgUpdateAnimals    ) returns (MsgUpdateAnimalsResponse    );
+  rpc DeleteAnimals     (MsgDeleteAnimals    ) returns (MsgDeleteAnimalsResponse    );
+  rpc CreateAnimalSkill (MsgCreateAnimalSkill) returns (MsgCreateAnimalSkillResponse);
+  rpc UpdateAnimalSkill (MsgUpdateAnimalSkill) returns (MsgUpdateAnimalSkillResponse);
+  rpc DeleteAnimalSkill (MsgDeleteAnimalSkill) returns (MsgDeleteAnimalSkillResponse);
+}
+message MsgCreateAnimals {
+  string creator  = 1;
+  string name     = 2;
+  uint64 power    = 3;
+  uint64 hp       = 4;
+  string location = 5;
+}
+
+message MsgCreateAnimalsResponse {
+  uint64 id = 1;
+}
+
+message MsgUpdateAnimals {
+  string creator  = 1;
+  uint64 id       = 2;
+  string name     = 3;
+  uint64 power    = 4;
+  uint64 hp       = 5;
+  string location = 6;
+}
+
+message MsgUpdateAnimalsResponse {}
+
+message MsgDeleteAnimals {
+  string creator = 1;
+  uint64 id      = 2;
+}
+
+message MsgDeleteAnimalsResponse {}
+
+message MsgCreateAnimalSkill {
+           string creator = 1;
+  repeated uint64 skill   = 2;
+}
+
+message MsgCreateAnimalSkillResponse {
+  uint64 id = 1;
+}
+
+message MsgUpdateAnimalSkill {
+           string creator = 1;
+           uint64 id      = 2;
+  repeated uint64 skill   = 3;
+}
+
+message MsgUpdateAnimalSkillResponse {}
+
+message MsgDeleteAnimalSkill {
+  string creator = 1;
+  uint64 id      = 2;
+}
+
+message MsgDeleteAnimalSkillResponse {}
+

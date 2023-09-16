@@ -1,0 +1,10 @@
+syntax = "proto3";
+package capy.capy;
+
+option go_package = "capy/x/capy/types";
+
+message AnimalSkill {
+  uint64 id = 1;
+  repeated uint64 skill = 2; 
+  string creator = 3;
+}

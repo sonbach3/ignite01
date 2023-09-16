@@ -1,0 +1,13 @@
+syntax = "proto3";
+package capy.capy;
+
+option go_package = "capy/x/capy/types";
+
+message Animals {
+  uint64 id = 1;
+  string name = 2; 
+  uint64 power = 3; 
+  uint64 hp = 4; 
+  string location = 5; 
+  string creator = 6;
+}

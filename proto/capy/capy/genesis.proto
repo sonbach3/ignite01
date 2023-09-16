@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package capy.capy;
+
+import "gogoproto/gogo.proto";
+import "capy/capy/params.proto";
+import "capy/capy/animals.proto";
+import "capy/capy/animal_skill.proto";
+
+option go_package = "capy/x/capy/types";
+
+// GenesisState defines the capy module's genesis state.
+message GenesisState {
+           Params      params           = 1 [(gogoproto.nullable) = false];
+  repeated Animals     animalsList      = 2 [(gogoproto.nullable) = false];
+           uint64      animalsCount     = 3;
+  repeated AnimalSkill animalSkillList  = 4 [(gogoproto.nullable) = false];
+           uint64      animalSkillCount = 5;
+}
+

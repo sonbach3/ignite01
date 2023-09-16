@@ -1,0 +1,12 @@
+syntax = "proto3";
+package capy.family;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "capy/x/family/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (gogoproto.goproto_stringer) = false;
+  
+}

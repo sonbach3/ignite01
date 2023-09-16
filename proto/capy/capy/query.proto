@@ -1,0 +1,86 @@
+syntax = "proto3";
+
+package capy.capy;
+
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "capy/capy/params.proto";
+import "capy/capy/animals.proto";
+import "capy/capy/animal_skill.proto";
+
+option go_package = "capy/x/capy/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  
+  // Parameters queries the parameters of the module.
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/capy/capy/params";
+  
+  }
+  
+  // Queries a list of Animals items.
+  rpc Animals    (QueryGetAnimalsRequest) returns (QueryGetAnimalsResponse) {
+    option (google.api.http).get = "/capy/capy/animals/{id}";
+  
+  }
+  rpc AnimalsAll (QueryAllAnimalsRequest) returns (QueryAllAnimalsResponse) {
+    option (google.api.http).get = "/capy/capy/animals";
+  
+  }
+  
+  // Queries a list of AnimalSkill items.
+  rpc AnimalSkill    (QueryGetAnimalSkillRequest) returns (QueryGetAnimalSkillResponse) {
+    option (google.api.http).get = "/capy/capy/animal_skill/{id}";
+  
+  }
+  rpc AnimalSkillAll (QueryAllAnimalSkillRequest) returns (QueryAllAnimalSkillResponse) {
+    option (google.api.http).get = "/capy/capy/animal_skill";
+  
+  }
+}
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetAnimalsRequest {
+  uint64 id = 1;
+}
+
+message QueryGetAnimalsResponse {
+  Animals Animals = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllAnimalsRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllAnimalsResponse {
+  repeated Animals                                Animals    = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetAnimalSkillRequest {
+  uint64 id = 1;
+}
+
+message QueryGetAnimalSkillResponse {
+  AnimalSkill AnimalSkill = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllAnimalSkillRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllAnimalSkillResponse {
+  repeated AnimalSkill                            AnimalSkill = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination  = 2;
+}
+
